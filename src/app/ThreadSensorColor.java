@@ -34,7 +34,7 @@ public class ThreadSensorColor extends Thread {
 
 					if (test == 10) {
 						if (this.control) {
-							this.control = this.appController.TakePicture();							
+							this.control = this.appController.TakePicture();
 							System.out.println("entrou");
 						}
 					} else {
@@ -53,10 +53,6 @@ public class ThreadSensorColor extends Thread {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void setControl(boolean control) {
-		this.control = control;
 	}
 
 }
