@@ -7,7 +7,7 @@ public class AppController {
 		this.windowReference = new TransparentFrame();
 	}
 
-	public boolean TakePicture() {
+	public int TakePicture() {
 		CaptureData cp = new CaptureData();
 		cp.windowRefence = this.windowReference;
 		cp.TakePicture();

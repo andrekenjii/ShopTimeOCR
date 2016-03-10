@@ -43,33 +43,34 @@ public class CaptureData {
 		}
 	}
 
-	public boolean ProcessOCR() {
+	public int ProcessOCR() {
 		// Call the tesseract.exe OCR
-		boolean validation = true;
+		int code = 0;
 		try {
 			@SuppressWarnings("unused")
 			Process process = new ProcessBuilder("C:\\OCR\\Tesseract-OCR\\tesseract.exe", "c:\\OCR\\myScreenShot.png",
 					"c:\\OCR\\out").start();
-			validation = this.validationData(this.readFile("c:\\OCR\\out.txt"));
+			code = this.validationData(this.readFile("c:\\OCR\\out.txt"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return validation;
+		return code;
 	}
 
-	private boolean validationData(String dataOcr) {
+	private int validationData(String dataOcr) {
 		dataOcr = dataOcr.trim();
+		int code = 0;
 		if (dataOcr.length() == 9) {
 			try {
-				int code = Integer.parseInt(dataOcr);
+				code = Integer.parseInt(dataOcr);
 
-				return false;
+				return code;
 			} catch (Exception e) {
-				return true;
+				return code;
 			}
 		} else {
-			return true;
+			return code;
 		}
 	}
 

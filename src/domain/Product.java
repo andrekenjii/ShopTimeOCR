@@ -1,12 +1,10 @@
 package domain;
 
-import java.util.ArrayList;
-
 public class Product {
 
 	private int id;
 	private int cod;
-	private ArrayList<ProductAdvertisement> lstProductAdvertisement;
+	private ProductAdvertisement productAdvertisement;
 
 	public int getId() {
 		return id;
@@ -24,12 +22,11 @@ public class Product {
 		this.cod = cod;
 	}
 
-	public ArrayList<ProductAdvertisement> getLstProductAdvertisement() {
-		return lstProductAdvertisement;
+	public ProductAdvertisement getProductAdvertisement() {
+		return productAdvertisement;
 	}
 
-	public void setLstProductAdvertisement(ArrayList<ProductAdvertisement> lstProductAdvertisement) {
-		this.lstProductAdvertisement = lstProductAdvertisement;
+	public void setProductAdvertisement(ProductAdvertisement productAdvertisement) {
+		this.productAdvertisement = productAdvertisement;
 	}
-
 }
