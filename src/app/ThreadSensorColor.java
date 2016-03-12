@@ -10,16 +10,16 @@ import domain.ProductAdvertisement;
 public class ThreadSensorColor extends Thread {
 	public TransparentFrame windowRefence;
 	private AppController appController;
-	private boolean control;
 	private Product product;
 	private ProductAdvertisement productAdvertisement;
 
 	public ThreadSensorColor(AppController app) {
 		this.appController = app;
-		this.control = true;
 	}
 
 	public void run() {
+		boolean control = true;
+
 		try {
 			Robot robot = new Robot();
 			if (this.windowRefence.isShowing()) {
@@ -41,11 +41,11 @@ public class ThreadSensorColor extends Thread {
 					}
 
 					if (test == 10) {
-						if (this.control) {
-							int code = this.appController.TakePicture();
+						if (control) {
 							System.out.println("entrou");
+							int code = this.appController.TakePicture();
 							if (code != 0) {
-								this.control = false;
+								control = false;
 								product = new Product();
 								product.setCod(code);
 								productAdvertisement = new ProductAdvertisement();
@@ -54,26 +54,33 @@ public class ThreadSensorColor extends Thread {
 								productAdvertisement.setStartDate(new Date(utilDate.getTime()));
 								product.setProductAdvertisement(productAdvertisement);
 							} else {
-								this.control = true;
-								java.util.Calendar cal = java.util.Calendar.getInstance();
-								java.util.Date utilDate = cal.getTime();
-								productAdvertisement.setEndDate(new Date(utilDate.getTime()));
-								product.setProductAdvertisement(productAdvertisement);
+								control = true;
 							}
 						}
 					} else {
-						this.control = true;
+						control = true;
+						if (product != null) {
+							java.util.Calendar cal = java.util.Calendar.getInstance();
+							java.util.Date utilDate = cal.getTime();
+							productAdvertisement.setEndDate(new Date(utilDate.getTime()));
+							product.setProductAdvertisement(productAdvertisement);
+
+							if (product.getProductAdvertisement().getStartDate() != null
+									&& product.getProductAdvertisement().getEndDate() != null) {
+								this.appController.InsertProduct(product);
+								product = null;
+								System.out.println("persistiu");
+							}
+						}
+
 						System.out.println("saiu");
+
 					}
 
 					robot.delay(300);
 				}
 			}
-		} catch (
-
-		Exception e)
-
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

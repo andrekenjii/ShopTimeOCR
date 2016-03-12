@@ -1,5 +1,8 @@
 package app;
 
+import dao.ProductDAO;
+import domain.*;
+
 public class AppController {
 	TransparentFrame windowReference;
 
@@ -20,5 +23,9 @@ public class AppController {
 		t.windowRefence = this.windowReference;
 		t.start();
 
+	}
+	
+	public void InsertProduct(Product product) {
+		new ProductDAO().InsertProduct(product);			
 	}
 }
