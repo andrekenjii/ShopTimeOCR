@@ -11,7 +11,8 @@ import net.sourceforge.tess4j.TesseractException;
 
 public class CaptureData {
 	public TransparentFrame windowRefence;
-	private static String imageFile = "c:\\OCR\\anuncio.png";
+	private static String pathFile = "c:\\OCR\\";
+	private static String nameFile = "anuncio.png";
 
 	public void TakePicture() {
 		Robot robot;
@@ -34,7 +35,8 @@ public class CaptureData {
 				Graphics2D gg = bimg.createGraphics();
 				gg.drawImage(img, 0, 0, img.getWidth(null), img.getHeight(null), null);
 
-				ImageIO.write(bimg, "png", new File(imageFile));
+				// ImageIO.write(bimg, "png", new File(imageFile));
+				ImageIO.write(bimg, "png", new File(pathFile + nameFile));
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -46,10 +48,11 @@ public class CaptureData {
 
 	public int ProcessOCR() {
 		// Call the tesseract.exe OCR
-		int code = 0;
+		int code = 1;
 		try {
 			ITesseract instance = new Tesseract1();
-			code = this.validationData(instance.doOCR(new File(imageFile)));
+			// code = this.validationData(instance.doOCR(new File(imageFile)));
+			code = this.validationData(instance.doOCR(new File(pathFile + nameFile)));
 
 		} catch (TesseractException ex) {
 			ex.printStackTrace();
