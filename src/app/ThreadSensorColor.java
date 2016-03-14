@@ -50,9 +50,7 @@ public class ThreadSensorColor extends Thread {
 					}
 
 					if (test >= 10) {
-						System.out.println("entrou e passou no teste de estab");
 						if (control) {
-							System.out.println("entrou e passou no controle");
 							int code = this.appController.TakePicture();
 							if (code != 0) {
 								control = false;
@@ -63,7 +61,6 @@ public class ThreadSensorColor extends Thread {
 								product.setProductAdvertisement(productAdvertisement);
 							} else {
 								control = true;
-								System.out.println("entrou e não possou no controle");
 							}
 						}
 					} else {
@@ -75,18 +72,14 @@ public class ThreadSensorColor extends Thread {
 									&& product.getProductAdvertisement().getEndDate() != null) {
 								this.appController.InsertProduct(product);
 								product = null;
-								System.out.println("persistiu");
 							}
 							endCount = 0;
-							control = true;							
-							
+							control = true;
+
 						} else if (product != null) {
 							endCount++;
-							System.out.println("somou end count");
 						}
-						System.out.println("saiu e não fez nada");
 					}
-
 					robot.delay(300);
 				}
 			}
