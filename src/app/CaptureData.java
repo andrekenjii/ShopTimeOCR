@@ -52,13 +52,11 @@ public class CaptureData {
 		try {
 			ITesseract instance = new Tesseract1();
 			// code = this.validationData(instance.doOCR(new File(imageFile)));
-			code = this.validationData(instance.doOCR(new File(pathFile + nameFile)));
-
+			return code = this.validationData(instance.doOCR(new File(pathFile + nameFile)));
 		} catch (TesseractException ex) {
 			ex.printStackTrace();
+			return code;
 		}
-
-		return code;
 	}
 
 	private int validationData(String dataOcr) {

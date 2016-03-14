@@ -18,6 +18,7 @@ public class ThreadSensorColor extends Thread {
 
 	public void run() {
 		boolean control = true;
+		int endCount = 0;
 
 		try {
 			Robot robot = new Robot();
@@ -29,26 +30,29 @@ public class ThreadSensorColor extends Thread {
 					double[] lab1 = RGBtoLAB(color.getRed(), color.getGreen(), color.getBlue());
 					double[] lab2 = RGBtoLAB(180, 195, 236);
 					double delta_e = calculaDE(lab1, lab2);
-					System.out.println(delta_e);
 
 					// teste de establização da tarja do anúncio
 					int test = 0;
-					for (int i = 0; i < 20; i++) {
-						color = robot.getPixelColor(windowRefence.getLocationOnScreen().x,
-								windowRefence.getLocationOnScreen().y);
-						lab1 = RGBtoLAB(color.getRed(), color.getGreen(), color.getBlue());
-						delta_e = calculaDE(lab1, lab2);
-						if (delta_e < 20) {
-							test++;
-						}
+					if (delta_e < 20) {
+						for (int i = 0; i < 20; i++) {
+							color = robot.getPixelColor(windowRefence.getLocationOnScreen().x,
+									windowRefence.getLocationOnScreen().y);
+							lab1 = RGBtoLAB(color.getRed(), color.getGreen(), color.getBlue());
+							delta_e = calculaDE(lab1, lab2);
+							if (delta_e < 20) {
+								test++;
+							}
 
-						Thread.sleep(100);// quando rodar 10x no for, este sleep
-											// sera equivalente a 3 segundos
+							Thread.sleep(150);// quando rodar 10x no for, este
+												// sleep
+												// sera equivalente a 3 segundos
+						}
 					}
 
 					if (test >= 10) {
+						System.out.println("entrou e passou no teste de estab");
 						if (control) {
-							System.out.println("entrou");
+							System.out.println("entrou e passou no controle");
 							int code = this.appController.TakePicture();
 							if (code != 0) {
 								control = false;
@@ -59,11 +63,11 @@ public class ThreadSensorColor extends Thread {
 								product.setProductAdvertisement(productAdvertisement);
 							} else {
 								control = true;
+								System.out.println("entrou e não possou no controle");
 							}
 						}
 					} else {
-						control = true;
-						if (product != null) {
+						if (endCount == 2 && product != null) {
 							productAdvertisement.setEndDate();
 							product.setProductAdvertisement(productAdvertisement);
 
@@ -73,10 +77,14 @@ public class ThreadSensorColor extends Thread {
 								product = null;
 								System.out.println("persistiu");
 							}
+							endCount = 0;
+							control = true;							
+							
+						} else if (product != null) {
+							endCount++;
+							System.out.println("somou end count");
 						}
-
-						System.out.println("saiu");
-
+						System.out.println("saiu e não fez nada");
 					}
 
 					robot.delay(300);

@@ -34,7 +34,7 @@ public class TransparentFrame extends JFrame implements MouseMotionListener, Act
 
 		setSize(210, 40);
 
-		setLocation(200, 200);
+		setLocation(291, 136);
 		
 		// Set the window to 55% opaque (45% translucent).		
 		this.setOpacity(0.55f);
