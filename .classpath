@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/makarov/workspace/ShopTimeOCR/sqljdbc42.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_65/lib/ext/RXTXcomm.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/makarov/workspace/ShopTimeOCR/lib/sqljdbc42.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/makarov/workspace/ShopTimeOCR/lib/tess4j-3.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/makarov/workspace/ShopTimeOCR/lib/RXTXcomm.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/makarov/workspace/ShopTimeOCR/lib/commons-io-2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/makarov/workspace/ShopTimeOCR/lib/jai_imageio.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/makarov/workspace/ShopTimeOCR/lib/jna.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/makarov/workspace/ShopTimeOCR/lib/lept4j-1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

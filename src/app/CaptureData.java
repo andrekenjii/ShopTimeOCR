@@ -2,15 +2,16 @@ package app;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract1;
+import net.sourceforge.tess4j.TesseractException;
 
 public class CaptureData {
 	public TransparentFrame windowRefence;
+	private static String imageFile = "c:\\OCR\\anuncio.png";
 
 	public void TakePicture() {
 		Robot robot;
@@ -33,7 +34,7 @@ public class CaptureData {
 				Graphics2D gg = bimg.createGraphics();
 				gg.drawImage(img, 0, 0, img.getWidth(null), img.getHeight(null), null);
 
-				ImageIO.write(bimg, "png", new File("c:\\OCR\\myScreenShot.png"));
+				ImageIO.write(bimg, "png", new File(imageFile));
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -47,12 +48,11 @@ public class CaptureData {
 		// Call the tesseract.exe OCR
 		int code = 0;
 		try {
-			@SuppressWarnings("unused")
-			Process process = new ProcessBuilder("C:\\OCR\\Tesseract-OCR\\tesseract.exe", "c:\\OCR\\myScreenShot.png",
-					"c:\\OCR\\out").start();
-			code = this.validationData(this.readFile("c:\\OCR\\out.txt"));
-		} catch (IOException e) {
-			e.printStackTrace();
+			ITesseract instance = new Tesseract1();
+			code = this.validationData(instance.doOCR(new File(imageFile)));
+
+		} catch (TesseractException ex) {
+			ex.printStackTrace();
 		}
 
 		return code;
@@ -72,34 +72,6 @@ public class CaptureData {
 		} else {
 			return code;
 		}
-	}
-
-	private String readFile(String f) {
-		String everything = "";
-
-		BufferedReader br;
-
-		try {
-
-			br = new BufferedReader(new FileReader(f));
-
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			everything = sb.toString();
-
-			br.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return everything;
-
 	}
 
 }
