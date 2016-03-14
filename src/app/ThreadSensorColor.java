@@ -2,7 +2,6 @@ package app;
 
 import java.awt.Color;
 import java.awt.Robot;
-import java.sql.Date;
 
 import domain.Product;
 import domain.ProductAdvertisement;
@@ -56,9 +55,7 @@ public class ThreadSensorColor extends Thread {
 								product = new Product();
 								product.setCod(code);
 								productAdvertisement = new ProductAdvertisement();
-								java.util.Calendar cal = java.util.Calendar.getInstance();
-								java.util.Date utilDate = cal.getTime();
-								productAdvertisement.setStartDate(new Date(utilDate.getTime()));
+								productAdvertisement.setStartDate();
 								product.setProductAdvertisement(productAdvertisement);
 							} else {
 								control = true;
@@ -67,9 +64,7 @@ public class ThreadSensorColor extends Thread {
 					} else {
 						control = true;
 						if (product != null) {
-							java.util.Calendar cal = java.util.Calendar.getInstance();
-							java.util.Date utilDate = cal.getTime();
-							productAdvertisement.setEndDate(new Date(utilDate.getTime()));
+							productAdvertisement.setEndDate();
 							product.setProductAdvertisement(productAdvertisement);
 
 							if (product.getProductAdvertisement().getStartDate() != null

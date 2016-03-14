@@ -41,8 +41,8 @@ public class ProductDAO {
 			try {
 				PreparedStatement p = conn.prepareStatement("insert into ProductAdvertisement values (?, ?, ?)");
 				p.setInt(1, productAdvertisement.getProductId());
-				p.setDate(2, productAdvertisement.getStartDate());
-				p.setDate(3, productAdvertisement.getEndDate());
+				p.setTimestamp(2, productAdvertisement.getStartDate());
+				p.setTimestamp(3, productAdvertisement.getEndDate());
 				p.executeUpdate();
 				p.close();
 			} catch (SQLException e) {

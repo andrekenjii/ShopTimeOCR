@@ -48,7 +48,7 @@ public class CaptureData {
 
 	public int ProcessOCR() {
 		// Call the tesseract.exe OCR
-		int code = 1;
+		int code = 0;
 		try {
 			ITesseract instance = new Tesseract1();
 			// code = this.validationData(instance.doOCR(new File(imageFile)));
